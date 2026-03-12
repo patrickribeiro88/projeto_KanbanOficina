@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecKanban - Oficina Mecânica</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar shadow-sm">
+    <div class="container-fluid">
+      <div class="topbar-content">
+        <div>
+          <h1 class="system-title">TecKanban</h1>
+          <p class="system-subtitle">Painel de Serviços da Oficina Mecânica</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar cliente, placa ou modelo">
+          </div>
+
+          <button
+            class="btn btn-light new-service-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#serviceModal"
+          >
+            <i class="bi bi-plus-lg"></i>
+            Novo Serviço
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="kanban-wrapper">
+    <div class="container-fluid">
+      <div class="kanban-board">
+
+        <!-- Veículo Recebido -->
+        <section class="kanban-column received-column">
+          <div class="column-header">
+            <div>
+              <h2>Veículo Recebido</h2>
+              <span id="countReceived">0 serviços</span>
+            </div>
+            <i class="bi bi-three-dots"></i>
+          </div>
+
+          <div id="receivedList">
+            <article class="service-card" data-status="received">
+              <div class="card-header-custom">
+                <h3>Carlos Souza</h3>
+                <span class="badge-status">Novo</span>
+              </div>
+
+              <div class="card-content">
+                <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong> (47) 99999-1111</p>
+                <p><i class="bi bi-envelope"></i> <strong>Email:</strong> carlos@email.com</p>
+                <p><i class="bi bi-car-front"></i> <strong>Modelo:</strong> Gol</p>
+                <p><i class="bi bi-calendar"></i> <strong>Ano:</strong> 2015</p>
+                <p><i class="bi bi-credit-card-2-front"></i> <strong>Placa:</strong> ABC-1234</p>
+                <p><i class="bi bi-tools"></i> <strong>Problema:</strong> Freio fazendo barulho</p>
+              </div>
+
+              <div class="card-footer-custom">
+                <small>Clique no card para mover</small>
+                <button class="icon-btn delete-btn" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </article>
+
+            <article class="service-card" data-status="received">
+              <div class="card-header-custom">
+                <h3>Fernanda Lima</h3>
+                <span class="badge-status">Novo</span>
+              </div>
+
+              <div class="card-content">
+                <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong> (47) 98888-2222</p>
+                <p><i class="bi bi-envelope"></i> <strong>Email:</strong> fernanda@email.com</p>
+                <p><i class="bi bi-car-front"></i> <strong>Modelo:</strong> Onix</p>
+                <p><i class="bi bi-calendar"></i> <strong>Ano:</strong> 2020</p>
+                <p><i class="bi bi-credit-card-2-front"></i> <strong>Placa:</strong> DEF-5678</p>
+                <p><i class="bi bi-tools"></i> <strong>Problema:</strong> Ar-condicionado não funciona</p>
+              </div>
+
+              <div class="card-footer-custom">
+                <small>Clique no card para mover</small>
+                <button class="icon-btn delete-btn" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Em Análise -->
+        <section class="kanban-column analysis-column">
+          <div class="column-header">
+            <div>
+              <h2>Em Análise</h2>
+              <span id="countAnalysis">0 serviços</span>
+            </div>
+            <i class="bi bi-three-dots"></i>
+          </div>
+
+          <div id="analysisList">
+            <article class="service-card" data-status="analysis">
+              <div class="card-header-custom">
+                <h3>Marcos Pereira</h3>
+                <span class="badge-status">Análise</span>
+              </div>
+
+              <div class="card-content">
+                <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong> (47) 97777-3333</p>
+                <p><i class="bi bi-envelope"></i> <strong>Email:</strong> marcos@email.com</p>
+                <p><i class="bi bi-car-front"></i> <strong>Modelo:</strong> HB20</p>
+                <p><i class="bi bi-calendar"></i> <strong>Ano:</strong> 2018</p>
+                <p><i class="bi bi-credit-card-2-front"></i> <strong>Placa:</strong> GHI-9012</p>
+                <p><i class="bi bi-tools"></i> <strong>Problema:</strong> Motor falhando</p>
+              </div>
+
+              <div class="card-footer-custom">
+                <small>Clique no card para mover</small>
+                <button class="icon-btn delete-btn" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Em Manutenção -->
+        <section class="kanban-column maintenance-column">
+          <div class="column-header">
+            <div>
+              <h2>Em Manutenção</h2>
+              <span id="countMaintenance">0 serviços</span>
+            </div>
+            <i class="bi bi-three-dots"></i>
+          </div>
+
+          <div id="maintenanceList">
+            <article class="service-card" data-status="maintenance">
+              <div class="card-header-custom">
+                <h3>Juliana Rocha</h3>
+                <span class="badge-status">Andamento</span>
+              </div>
+
+              <div class="card-content">
+                <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong> (47) 96666-4444</p>
+                <p><i class="bi bi-envelope"></i> <strong>Email:</strong> juliana@email.com</p>
+                <p><i class="bi bi-car-front"></i> <strong>Modelo:</strong> Corolla</p>
+                <p><i class="bi bi-calendar"></i> <strong>Ano:</strong> 2017</p>
+                <p><i class="bi bi-credit-card-2-front"></i> <strong>Placa:</strong> JKL-3456</p>
+                <p><i class="bi bi-tools"></i> <strong>Problema:</strong> Troca de embreagem</p>
+              </div>
+
+              <div class="card-footer-custom">
+                <small>Clique no card para mover</small>
+                <button class="icon-btn delete-btn" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Concluído -->
+        <section class="kanban-column completed-column">
+          <div class="column-header">
+            <div>
+              <h2>Concluído</h2>
+              <span id="countCompleted">0 serviços</span>
+            </div>
+            <i class="bi bi-three-dots"></i>
+          </div>
+
+          <div id="completedList">
+            <article class="service-card" data-status="completed">
+              <div class="card-header-custom">
+                <h3>Patrícia Gomes</h3>
+                <span class="badge-status">Finalizado</span>
+              </div>
+
+              <div class="card-content">
+                <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong> (47) 94444-6666</p>
+                <p><i class="bi bi-envelope"></i> <strong>Email:</strong> patricia@email.com</p>
+                <p><i class="bi bi-car-front"></i> <strong>Modelo:</strong> Uno</p>
+                <p><i class="bi bi-calendar"></i> <strong>Ano:</strong> 2012</p>
+                <p><i class="bi bi-credit-card-2-front"></i> <strong>Placa:</strong> PQR-1122</p>
+                <p><i class="bi bi-tools"></i> <strong>Problema:</strong> Troca de bateria</p>
+              </div>
+
+              <div class="card-footer-custom">
+                <small>Clique no card para mover</small>
+                <button class="icon-btn delete-btn" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <button
+    class="floating-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#serviceModal"
+    title="Adicionar serviço"
+  >
+    <i class="bi bi-plus-lg"></i>
+  </button>
+
+  <!-- Modal de cadastro -->
+  <div class="modal fade" id="serviceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content custom-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Cadastrar Novo Serviço</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="serviceForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nome do cliente</label>
+                <input type="text" class="form-control" id="clientName" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="clientPhone" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" id="clientEmail" required>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="carModel" required>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label">Ano</label>
+                <input type="number" class="form-control" id="carYear" required>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Placa</label>
+                <input type="text" class="form-control" id="carPlate" required>
+              </div>
+
+              <div class="col-md-8">
+                <label class="form-label">Problema atual</label>
+                <input type="text" class="form-control" id="problem" required>
+              </div>
+            </div>
+
+            <div class="modal-footer border-0 px-0 pt-4">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary px-4">
+                Salvar Serviço
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de movimentação -->
+  <div class="modal fade" id="moveCardModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Mover serviço</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mb-3">Escolha para onde deseja mover este card:</p>
+
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-outline-primary" id="moveLeftBtn">
+              <i class="bi bi-arrow-left"></i> Voltar etapa
+            </button>
+
+            <button type="button" class="btn btn-outline-success" id="moveRightBtn">
+              Avançar etapa <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
